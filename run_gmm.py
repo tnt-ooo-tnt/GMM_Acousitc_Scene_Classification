@@ -7,13 +7,28 @@ import argparse
 from librosa import resample
 
 def is_wav_file(filename):
+    '''
+    Check if the file is '.wav' file or not
+    :param filename: file name to check out
+    :return: True if the file is '.wav' file
+    '''
     return any(filename.endswith(extension) for extension in [".wav"])
 
 def load_wav_file(filename):
+    '''
+    Load wav file using filename
+    :param filename: file name to open
+    :return: sample rate and data of the wav file
+    '''
     sample_rate, data = wavfile.read(filename)
     return sample_rate, data
 
 def load_data(filepath):
+    '''
+    Load wav file and pre-process it to correct shape and type
+    :param filepath: file path of wav file
+    :return: mfcc data
+    '''
     sample_rate, data = load_wav_file(filepath)
     if data.dtype != np.floating:
         data = data.astype(np.floating)
@@ -45,6 +60,7 @@ parser.add_argument('--model', type=str, default="./model/gmm.json", help="Model
 
 opt = parser.parse_args()
 
+# Labels of your Machine
 labels = ['calm', 'traffic', 'noisy', 'tv']
 
 filepath = opt.input_file
