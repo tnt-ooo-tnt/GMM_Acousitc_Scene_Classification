@@ -7,7 +7,7 @@ import argparse
 from librosa import resample
 
 def is_wav_file(filename):
-    return any(filename.endswith(Extension) for extension in [".wav"])
+    return any(filename.endswith(extension) for extension in [".wav"])
 
 def load_wav_file(filename):
     sample_rate, data = wavfile.read(filename)
